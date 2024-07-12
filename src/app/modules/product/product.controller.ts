@@ -8,10 +8,10 @@ import { ProductService } from './product.service';
 const createProduct = catchAsync(async (req, res) => {
     if (!req.files || !('image' in req.files)) {
         return res
-           .status(httpStatus.BAD_REQUEST)
-           .json({ message: 'Image files are required' });
-     }
-     const image = req.files?.['image']?.[0].path;
+            .status(httpStatus.BAD_REQUEST)
+            .json({ message: 'Image files are required' });
+    }
+    const image = req.files?.['image']?.[0].path;
 
     const result = await ProductService.createProduct(req.body, image);
 
@@ -28,6 +28,12 @@ const createProduct = catchAsync(async (req, res) => {
 const updateProduct = catchAsync(async (req, res) => {
     const { id } = req.params;
     const payload = req.body;
+
+    if (req.files && ('image' in req.files)) {
+        const image = req.files?.['image']?.[0].path;
+        payload.image = image;
+    }
+
     const result = await ProductService.updateProduct(id, payload);
 
     sendResponse(res, {

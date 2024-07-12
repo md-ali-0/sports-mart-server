@@ -26,6 +26,11 @@ const productSchema = new Schema<IProduct>({
         type: String,
         required: true,
     },
+    rating: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     brand: {
         type: String,
         required: true,

@@ -10,7 +10,7 @@ router.post(
     upload.fields([{ name: 'image', maxCount: 1 }]),
     ProductController.createProduct,
 );
-router.put('/:id', ProductController.updateProduct);
+router.put('/:id', upload.fields([{ name: 'image', maxCount: 1 }]), ProductController.updateProduct);
 router.delete('/:id', ProductController.deleteProduct);
 
 export const ProductRoute = router;
