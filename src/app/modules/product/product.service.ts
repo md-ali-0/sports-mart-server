@@ -2,7 +2,8 @@ import QueryBuilder from "../../builder/QueryBuilder";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 
-const createProduct = async (payload: IProduct): Promise<IProduct | null> => {
+const createProduct = async (payload: IProduct, image: string): Promise<IProduct | null> => {
+    payload.image = image
     const result = await Product.create(payload);
     return result;
 };

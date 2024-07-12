@@ -3,12 +3,17 @@ import { catchAsync } from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ProductService } from './product.service';
 
-
 // Create a new Product
 
 const createProduct = catchAsync(async (req, res) => {
-    const payload = req.body;
-    const result = await ProductService.createProduct(payload);
+    if (!req.files || !('image' in req.files)) {
+        return res
+           .status(httpStatus.BAD_REQUEST)
+           .json({ message: 'Image files are required' });
+     }
+     const image = req.files?.['image']?.[0].path;
+
+    const result = await ProductService.createProduct(req.body, image);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
