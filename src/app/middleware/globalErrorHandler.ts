@@ -1,12 +1,10 @@
 import { ErrorRequestHandler } from 'express';
 import httpStatus from 'http-status';
-import { ZodError } from 'zod';
 import config from '../config';
 import AppError from '../error/AppError';
 import handleCastError from '../error/handleCastError';
 import handleDuplicateError from '../error/handleDuplicateError';
 import handleValidationError from '../error/handleValidationError';
-import handleZodError from '../error/handleZodError';
 import { IErrorSources } from '../interface/error';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
@@ -19,12 +17,7 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
         },
     ];
 
-    if (error instanceof ZodError) {
-        const simplifiedError = handleZodError(error);
-        statusCode = simplifiedError.statusCode;
-        message = simplifiedError.message;
-        errorSources = simplifiedError.errorSources;
-    } else if (error?.name === 'ValidationError') {
+    if (error?.name === 'ValidationError') {
         const simplifiedError = handleValidationError(error);
         statusCode = simplifiedError.statusCode;
         message = simplifiedError.message;
@@ -66,10 +59,4 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     });
 };
 
-export default globalErrorHandler;
-
-/*
-success
-message
-errorSource
-*/
+export default globalErrorHandler
