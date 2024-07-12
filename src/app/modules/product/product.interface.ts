@@ -7,5 +7,4 @@ export interface IProduct {
     stock: number;
     category: string;
     brand: string;
-    isFeatured: boolean
 }

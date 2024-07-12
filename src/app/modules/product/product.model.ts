@@ -29,11 +29,7 @@ const productSchema = new Schema<IProduct>({
     brand: {
         type: String,
         required: true,
-    },
-    isFeatured: {
-        type: Boolean,
-        required: true,
-    },
+    }
 },{
     versionKey: false,
     timestamps: true
