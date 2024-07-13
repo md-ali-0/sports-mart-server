@@ -5,6 +5,7 @@ import { ProductController } from './product.controller';
 const router = Router();
 
 router.get('/', ProductController.getAllProducts);
+router.get('/:id', ProductController.getSingleProduct);
 router.post(
     '/',
     upload.fields([{ name: 'image', maxCount: 1 }]),

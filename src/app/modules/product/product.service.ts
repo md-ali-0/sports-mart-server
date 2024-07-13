@@ -24,6 +24,11 @@ const deleteProduct = async (id: string): Promise<IProduct | null> => {
     return result;
 };
 
+const getSingleProduct = async (id: string)=>{
+    const result = await Product.findById(id);
+    return result;
+}
+
 const getAllProducts = async (
     query: Record<string, unknown>,
 ): Promise<IProduct[] | null> => {
@@ -44,4 +49,5 @@ export const ProductService = {
     updateProduct,
     deleteProduct,
     getAllProducts,
+    getSingleProduct
 };
