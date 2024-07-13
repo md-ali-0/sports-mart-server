@@ -32,11 +32,13 @@ const getSingleProduct = async (id: string)=>{
 const getAllProducts = async (
     query: Record<string, unknown>,
 ): Promise<IProduct[] | null> => {
+
     const productQuery = new QueryBuilder(Product.find(), query)
-        .search(['name', 'brand', 'category', 'rating'])
+        .search(['name'])
         .filter()
         .sort()
         .fields()
+
     const result = await productQuery.modelQuery;
     return result;
 };

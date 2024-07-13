@@ -1,10 +1,7 @@
-import QueryBuilder from '../../builder/QueryBuilder';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
-const createOrder = async (
-    payload: IOrder,
-): Promise<IOrder | null> => {
+const createOrder = async (payload: IOrder): Promise<IOrder | null> => {
     const result = await Order.create(payload);
     return result;
 };
@@ -22,23 +19,13 @@ const deleteOrder = async (id: string): Promise<IOrder | null> => {
     return result;
 };
 
-const getSingleOrder = async (id: string)=>{
+const getSingleOrder = async (id: string) => {
     const result = await Order.findById(id);
     return result;
-}
+};
 
-const getAllOrders = async (
-    query: Record<string, unknown>,
-): Promise<IOrder[] | null> => {
-    const orderQuery = new QueryBuilder(Order.find(), query)
-        .search(['name', 'brand', 'category', 'rating'])
-        .filter()
-        .sort()
-        .fields()
-        .paginate()
-        .limit();
-
-    const result = await orderQuery.modelQuery;
+const getAllOrders = async () => {
+    const result = await Order.find();
     return result;
 };
 
@@ -47,5 +34,5 @@ export const OrderService = {
     updateOrder,
     deleteOrder,
     getAllOrders,
-    getSingleOrder
+    getSingleOrder,
 };
