@@ -37,9 +37,6 @@ const getAllProducts = async (
         .filter()
         .sort()
         .fields()
-        .paginate()
-        .limit();
-
     const result = await productQuery.modelQuery;
     return result;
 };
