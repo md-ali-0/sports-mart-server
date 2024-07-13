@@ -49,7 +49,7 @@ const deleteOrder = catchAsync(async (req, res) => {
 // Retrieve all Orders
 
 const getAllOrders = catchAsync(async (req, res) => {
-    const result = await OrderService.getAllOrders(req.query);
+    const result = await OrderService.getAllOrders();
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
