@@ -4,9 +4,9 @@ import { Product } from './product.model';
 
 const createProduct = async (
     payload: IProduct,
-    image: string,
+    // image: string,
 ): Promise<IProduct | null> => {
-    payload.image = image;
+    // payload.image = image;
     const result = await Product.create(payload);
     return result;
 };
